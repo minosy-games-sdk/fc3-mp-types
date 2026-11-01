@@ -11,7 +11,7 @@ export interface ClientApi {
   readonly events: Events & { callRemote(name: string, ...args: unknown[]): void; };
   readonly players: EntityPool<Player> & { readonly local: Player; };
   readonly vehicles: EntityPool<Vehicle>;
-  readonly browsers: { new(url: string): Browser; };
+  readonly browsers: { 'new'(url: string): Browser; };
   readonly gui: { readonly chat: { focus(active: boolean): void; } };
   readonly resources: { readonly name: string; };
 }

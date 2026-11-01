@@ -13,7 +13,7 @@ export interface ServerApi {
   readonly commands: { add(name: string, handler: (player: Player, args: string[]) => void | Promise<void>): void; remove(name: string): void; };
   readonly players: EntityPool<Player>;
   readonly vehicles: Pick<EntityPool<Vehicle>, 'at' | 'forEach' | 'toArray'> & {
-    new(model: 'sedan' | 'quad' | '4x4', position: Vector3, options?: { heading?: number }): Promise<Vehicle>;
+    'new'(model: 'sedan' | 'quad' | '4x4', position: Vector3, options?: { heading?: number }): Promise<Vehicle>;
     destroy(vehicle: Vehicle | number): Promise<void>;
   };
   readonly resources: { readonly name: string; };

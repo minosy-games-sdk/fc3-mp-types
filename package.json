@@ -1,0 +1,11 @@
+{
+  "name": "@fc3mp/types",
+  "version": "0.1.0",
+  "description": "FC3 MP JavaScript resource API definitions",
+  "license": "MIT",
+  "repository": "github:minosy-games-sdk/fc3-mp-types",
+  "types": "common.d.ts",
+  "exports": {"./client": {"types": "./client.d.ts"}, "./server": {"types": "./server.d.ts"}},
+  "typesVersions": {"*": {"client": ["client.d.ts"], "server": ["server.d.ts"]}},
+  "files": ["common.d.ts", "client.d.ts", "server.d.ts", "README.md", "LICENSE"]
+}

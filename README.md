@@ -29,3 +29,13 @@ game Lua standard libraries are not a filesystem/process sandbox.
 const [playerId] = await natives.GetLocalPlayerId();
 const [value] = await mp.natives.math.abs(-42);
 ```
+
+Server resources can grant a network-admitted weapon with
+`await player.giveWeapon('AK47', 120)` and query installed template identifiers
+with `await mp.weapons.list()`. The grant's ammo budget includes the initial clip.
+Weapons created only through client natives remain local. Template availability
+does not certify every weapon strategy's replication or combat acceptance.
+
+`mp.console.commands.add(name, async args => ...)` registers server-console-only
+handlers, invoked with `script <name> [arguments]`. They are separate from chat
+commands and client events. Resource shutdown removes its handlers.

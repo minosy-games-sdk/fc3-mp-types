@@ -3,6 +3,8 @@ export interface Player extends Entity {
   readonly name: string;
   call(event: string, args?: unknown[]): void;
   outputChatBox(text: string): void;
+  /** Issue a server-owned weapon. Client-local weapons are not replicated. */
+  giveWeapon(weapon: string, ammo?: number): Promise<{ id: number; weapon: string; ammo: number }>;
 }
 export interface ServerEvents extends Events {
   callClient(player: Player, name: string, ...args: unknown[]): void;
@@ -11,6 +13,12 @@ export interface ServerEvents extends Events {
 export interface ServerApi {
   readonly events: ServerEvents;
   readonly commands: { add(name: string, handler: (player: Player, args: string[]) => void | Promise<void>): void; remove(name: string): void; };
+  /** Available only to the native server console through `script <command>`. */
+  readonly console: { log(...values: unknown[]): void; readonly commands: {
+    add(name: string, handler: (args: string[]) => void | Promise<void>): void;
+    remove(name: string): void;
+  }; };
+  readonly weapons: { list(): Promise<ReadonlyArray<{ id: number; name: string }>>; };
   readonly players: EntityPool<Player>;
   readonly vehicles: Pick<EntityPool<Vehicle>, 'at' | 'forEach' | 'toArray'> & {
     'new'(model: 'sedan' | 'quad' | '4x4', position: Vector3, options?: { heading?: number }): Promise<Vehicle>;
